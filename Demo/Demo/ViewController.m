@@ -8,7 +8,7 @@
 /**
  * 需求：
  * 1. 有 callback, 走 callback
- * 2. 如果也有 delegate，则不影响调用
+ * 2. 如果也有 delegate，同样不影响调用
  */
 
 #import "ViewController.h"

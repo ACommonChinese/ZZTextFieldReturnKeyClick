@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-
 #import "Aspects.h"
 
 typedef void (^block_id_t)(id obj);

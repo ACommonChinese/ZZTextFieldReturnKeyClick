@@ -14,13 +14,12 @@
 
 @implementation ZZTextField_2
 
-- (void)setDelegate:(id<UITextFieldDelegate>)delegate
-{
+- (void)setDelegate:(id<UITextFieldDelegate>)delegate {
     [super setDelegate:delegate];
+    
     __weak typeof(self) weakSelf = self;
     [[delegate class] aspect_hookSelector:@selector(textFieldShouldReturn:) withOptions:AspectPositionBefore usingBlock:^(id<AspectInfo> info){
-        // NSLog(@"钩到了方法");
-        // NSLog(@"%@-%ld", [info arguments], [info arguments].count);
+
         if ([[info arguments][0] isKindOfClass:[ZZTextField_2 class]]) {
             ZZTextField_2 *textField = [info arguments][0];
             if (weakSelf.searchCallback) {
@@ -30,16 +29,18 @@
     } error:NULL];
 }
 
-- (void)willMoveToSuperview:(UIView *)newSuperview
-{
-    if (newSuperview && self.delegate == nil)
-    {
+/**
+ *  @bug: must first set delegate and then callback
+ *
+ *  @param newSuperview <#newSuperview description#>
+ */
+- (void)willMoveToSuperview:(UIView *)newSuperview {
+    if (newSuperview && self.delegate == nil) {
         self.delegate = self;
     }
 }
 
-- (BOOL)textFieldShouldReturn:(UITextField *)textField
-{
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
     return YES;
 }
 

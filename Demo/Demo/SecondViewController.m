@@ -23,20 +23,25 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+    self.textField_1.tag = 1;
     self.textField_1.delegate = self;
+    self.textField_2.tag = 2;
     self.textField_2.delegate = self;
     
+    self.textField_3.tag = 3;
     self.textField_3.searchCallback = ^(NSString *text) {
         NSLog(@"ZZTextField_2.textField_3#callback：%@", text);
     };
-    self.textField_4.delegate = self;
+    
+    self.textField_4.tag = 4;
     self.textField_4.searchCallback = ^(NSString *text) {
         NSLog(@"ZZTextField_2.textField_4#callback：%@", text);
     };
+    self.textField_4.delegate = self;
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    NSLog(@"%@ called %s", [textField.delegate class], __func__);
+    NSLog(@"textField_%@ called %s", @(textField.tag), __func__);
     return YES;
 }
 
