@@ -23,26 +23,29 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+    self.textField_1.tag = 1;
     self.textField_1.delegate = self;
+    self.textField_2.tag = 2;
     self.textField_2.delegate = self;
     
+    self.textField_3.tag = 3;
     self.textField_3.searchCallback = ^(NSString *text) {
-        NSLog(@"callback返回输入内容：%@", text);
+        NSLog(@"ZZTextField_2.textField_3#callback：%@", text);
+    };
+    
+    self.textField_4.tag = 4;
+    self.textField_4.searchCallback = ^(NSString *text) {
+        NSLog(@"ZZTextField_2.textField_4#callback：%@", text);
     };
     self.textField_4.delegate = self;
-    self.textField_4.searchCallback = ^(NSString *text) {
-        NSLog(@"callback返回输入内容：%@", text);
-    };
 }
 
-- (BOOL)textFieldShouldReturn:(UITextField *)textField
-{
-    NSLog(@"%s--%@", __func__, textField.delegate);
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    NSLog(@"textField_%@ called %s", @(textField.tag), __func__);
     return YES;
 }
 
-- (IBAction)dismiss:(id)sender
-{
+- (IBAction)dismiss:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
