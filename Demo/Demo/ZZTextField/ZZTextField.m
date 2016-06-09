@@ -18,17 +18,14 @@
 
 @implementation UITextField (ReturnKeyClick)
 
-- (BOOL)returnKeyClick:(UITextField *)textField
-{
-    if ([textField isKindOfClass:[ZZTextField class]])
-    {
-        // NSLog(@"%@", self); // ViewController
+- (BOOL)returnKeyClick:(UITextField *)textField {
+    if ([textField isKindOfClass:[ZZTextField class]]) {
         ZZTextField *myField = (ZZTextField *)textField;
-        if (myField.searchCallback)
-        {
+        if (myField.searchCallback) {
             myField.searchCallback(textField.text);
         }
     }
+    
     return [textField returnKeyClick:textField];
 }
 
@@ -37,68 +34,64 @@
 @interface ZZTextField () <UITextFieldDelegate>
 
 @property (nonatomic, assign) id<UITextFieldDelegate> keepDelegate;
+
 @end
 
 @implementation ZZTextField
 
-- (void)setDelegate:(id<UITextFieldDelegate>)delegate
-{
+- (void)setDelegate:(id<UITextFieldDelegate>)delegate {
     [super setDelegate:delegate];
-    if ([self isKindOfClass:[ZZTextField class]] && delegate != self)
-    {
-        // 如果当前textField是ZZTextField对象并且delegate != self时，交换方法实现
+    
+    if ([self isKindOfClass:[ZZTextField class]] && delegate != self) {
         SEL selector = @selector(textFieldShouldReturn:);
-        if ([delegate respondsToSelector:selector])
-        {
+        if ([delegate respondsToSelector:selector]) {
             static dispatch_once_t onceToken;
             dispatch_once(&onceToken, ^{
-                [ZZTextField exchangeInstanceMethodWithClass1:[self.delegate class] method1:selector class2:[self class] method2:@selector(returnKeyClick:)];
+                [ZZTextField exchangeInstanceMethodWithClass:[self.delegate class] method:selector otherClass:[self class] otherMethod:@selector(returnKeyClick:)];
             });
         }
     }
 }
 
-- (instancetype)initWithCoder:(NSCoder *)aDecoder
-{
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
-    if (self)
-    {
+    
+    if (self) {
         [self commonInit];
     }
+    
     return self;
 }
 
-- (instancetype)init
-{
+- (instancetype)init {
     self = [super init];
-    if (self)
-    {
+    
+    if (self) {
         [self commonInit];
     }
+    
     return self;
 }
 
-- (instancetype)initWithFrame:(CGRect)frame
-{
+- (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
-    if (self)
-    {
+    
+    if (self) {
         [self commonInit];
     }
+    
     return self;
 }
 
-- (void)commonInit
-{
+- (void)commonInit {
     self.delegate = self;
 }
 
-- (BOOL)textFieldShouldReturn:(UITextField *)textField
-{
-    if (self.searchCallback)
-    {
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    if (self.searchCallback) {
         self.searchCallback(textField.text);
     }
+    
     return YES;
 }
 

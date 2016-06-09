@@ -27,22 +27,20 @@
     self.textField_2.delegate = self;
     
     self.textField_3.searchCallback = ^(NSString *text) {
-        NSLog(@"callback返回输入内容：%@", text);
+        NSLog(@"ZZTextField_2.textField_3#callback：%@", text);
     };
     self.textField_4.delegate = self;
     self.textField_4.searchCallback = ^(NSString *text) {
-        NSLog(@"callback返回输入内容：%@", text);
+        NSLog(@"ZZTextField_2.textField_4#callback：%@", text);
     };
 }
 
-- (BOOL)textFieldShouldReturn:(UITextField *)textField
-{
-    NSLog(@"%s--%@", __func__, textField.delegate);
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    NSLog(@"%@ called %s", [textField.delegate class], __func__);
     return YES;
 }
 
-- (IBAction)dismiss:(id)sender
-{
+- (IBAction)dismiss:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
