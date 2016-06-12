@@ -26,12 +26,13 @@
     self.textField_1.delegate = self;
     self.textField_2.delegate = self;
     
+    self.textField_3.delegate = self;
     self.textField_3.searchCallback = ^(NSString *text) {
-        NSLog(@"callback返回输入内容：%@", text);
+        NSLog(@"3. callback返回输入内容：%@", text);
     };
     self.textField_4.delegate = self;
     self.textField_4.searchCallback = ^(NSString *text) {
-        NSLog(@"callback返回输入内容：%@", text);
+        NSLog(@"4. callback返回输入内容：%@", text);
     };
 }
 

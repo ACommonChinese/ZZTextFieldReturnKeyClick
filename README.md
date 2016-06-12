@@ -11,3 +11,6 @@
 
 这个链接：<https://www.ianisme.com/ios/2019.html> 对运行时的解释不错，可以参考一下。本Demo的重点在于使用 `Aspects` 解决我在做项目时遇到的一个小问题。
 
+**Note:**  
+刚发现一个问题，在SecondViewController中，在textField_3中输入东西，然后点击键盘的return, textField_4的回调也被打印了，这点不对，正在研究中。若发现解决方法请联系我 liuxing8807@126.com
+

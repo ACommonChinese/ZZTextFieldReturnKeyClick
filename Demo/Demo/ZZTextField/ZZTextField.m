@@ -44,7 +44,7 @@
 - (void)setDelegate:(id<UITextFieldDelegate>)delegate
 {
     [super setDelegate:delegate];
-    if ([self isKindOfClass:[ZZTextField class]] && delegate != self)
+    if ([self isKindOfClass:[ZZTextField class]]  && delegate != self)
     {
         // 如果当前textField是ZZTextField对象并且delegate != self时，交换方法实现
         SEL selector = @selector(textFieldShouldReturn:);
@@ -101,5 +101,10 @@
     }
     return YES;
 }
+
+//- (BOOL)respondsToSelector:(SEL)aSelector
+//{
+//    return [super respondsToSelector:aSelector];
+//}
 
 @end
