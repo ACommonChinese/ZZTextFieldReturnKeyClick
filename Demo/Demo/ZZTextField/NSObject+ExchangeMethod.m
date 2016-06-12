@@ -11,26 +11,20 @@
 
 @implementation NSObject (ExchangeMethod)
 
-+ (void)exchangeInstanceMethodWithClass1:(id)cls1 method1:(SEL)method1 class2:(id)cls2 method2:(SEL)method2
-{
-    method_exchangeImplementations(class_getInstanceMethod(cls1, method1), class_getInstanceMethod(cls2, method2));
++ (void)exchangeInstanceMethodWithClass:(id)klass method:(SEL)method otherClass:(id)klass2 otherMethod:(SEL)method2 {
+    method_exchangeImplementations(class_getInstanceMethod(klass, method), class_getInstanceMethod(klass2, method2));
 }
 
-+ (void)exchangeInstanceMethod1:(SEL)method1 method2:(SEL)method2
-{
-    [self exchangeInstanceMethodWithClass1:self method1:method1 class2:self method2:method2];
-    // method_exchangeImplementations(class_getInstanceMethod(self, method1), class_getInstanceMethod(self, method2));
++ (void)exchangeInstanceMethod:(SEL)method otherMethod:(SEL)method2 {
+    [self exchangeInstanceMethodWithClass:self method:method otherClass:self otherMethod:method2];
 }
 
-+ (void)exchangeClassMethodWithClass1:(id)cls1 method1:(SEL)method1 class2:(id)cls2 method2:(SEL)method2
-{
-    method_exchangeImplementations(class_getClassMethod(cls1, method1), class_getClassMethod(cls2, method2));
++ (void)exchangeClassMethodWithClass:(id)kass method:(SEL)method otherClass:(id)klass2 otherMethod:(SEL)method2 {
+    method_exchangeImplementations(class_getClassMethod(kass, method), class_getClassMethod(klass2, method2));
 }
 
-+ (void)exchangeClassMethod1:(SEL)method1 method2:(SEL)method2
-{
-    [self exchangeClassMethodWithClass1:self method1:method1 class2:self method2:method2];
-    // method_exchangeImplementations(class_getClassMethod(self, method1), class_getClassMethod(self, method2));
++ (void)exchangeClassMethod:(SEL)method otherMethod:(SEL)method2 {
+    [self exchangeClassMethodWithClass:self method:method otherClass:self otherMethod:method2];
 }
 
 @end

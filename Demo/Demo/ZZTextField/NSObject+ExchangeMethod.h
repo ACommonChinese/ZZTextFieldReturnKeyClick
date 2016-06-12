@@ -10,12 +10,10 @@
 
 @interface NSObject (ExchangeMethod)
 
-// 交换实例方法
-+ (void)exchangeInstanceMethodWithClass1:(id)cls1 method1:(SEL)method1 class2:(id)cls2 method2:(SEL)method2;
-+ (void)exchangeInstanceMethod1:(SEL)method1 method2:(SEL)method2;
++ (void)exchangeInstanceMethodWithClass:(id)klass method:(SEL)method otherClass:(id)klass2 otherMethod:(SEL)method2;
++ (void)exchangeInstanceMethod:(SEL)method otherMethod:(SEL)method2;
 
-// 交换类方法
-+ (void)exchangeClassMethodWithClass1:(id)cls1 method1:(SEL)method1 class2:(id)cls2 method2:(SEL)method2;
-+ (void)exchangeClassMethod1:(SEL)method1 method2:(SEL)method2;
++ (void)exchangeClassMethodWithClass:(id)klass method:(SEL)method otherClass:(id)klass2 otherMethod:(SEL)method2;
++ (void)exchangeClassMethod:(SEL)method otherMethod:(SEL)method2;
 
 @end
