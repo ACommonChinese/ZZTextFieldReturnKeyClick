@@ -41,7 +41,11 @@
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    NSLog(@"textField_%@ called %s", @(textField.tag), __func__);
+    if([textField isKindOfClass:[ZZTextField_2 class]]) {
+        [(ZZTextField_2 *)textField textFieldShouldReturn: textField];
+    }
+    
+    NSLog(@"ZZTextField_2.textField_%@ called %s", @(textField.tag), __func__);
     return YES;
 }
 

@@ -7,12 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Aspects.h"
 
 typedef void (^block_id_t)(id obj);
 
 @interface ZZTextField_2 : UITextField
 
 @property (nonatomic, copy) block_id_t searchCallback;
+- (BOOL)textFieldShouldReturn:(UITextField *)textField;
 
 @end

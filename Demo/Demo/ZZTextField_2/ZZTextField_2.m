@@ -14,33 +14,18 @@
 
 @implementation ZZTextField_2
 
-- (void)setDelegate:(id<UITextFieldDelegate>)delegate {
-    [super setDelegate:delegate];
+- (void)setSearchCallback:(block_id_t)searchCallback {
+    _searchCallback = searchCallback;
     
-    __weak typeof(self) weakSelf = self;
-    [[delegate class] aspect_hookSelector:@selector(textFieldShouldReturn:) withOptions:AspectPositionBefore usingBlock:^(id<AspectInfo> info){
-
-        if ([[info arguments][0] isKindOfClass:[ZZTextField_2 class]]) {
-            ZZTextField_2 *textField = [info arguments][0];
-            if (weakSelf.searchCallback) {
-                weakSelf.searchCallback(textField.text);
-            };
-        }
-    } error:NULL];
-}
-
-/**
- *  @bug: must first set delegate and then callback
- *
- *  @param newSuperview <#newSuperview description#>
- */
-- (void)willMoveToSuperview:(UIView *)newSuperview {
-    if (newSuperview && self.delegate == nil) {
-        self.delegate = self;
-    }
+    self.delegate = self;
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    if (self.searchCallback) {
+        self.searchCallback(textField.text);
+    }
+    
+    NSLog(@"ZZTextField_2(Category).textField_%@ called %s", @(textField.tag), __func__);
     return YES;
 }
 
